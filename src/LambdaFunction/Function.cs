@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Amazon.Lambda.Core;
 using Alexa.NET.Request;
 using Alexa.NET.Response;
+using Alexa.NET.Request.Type;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializerAttribute(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
@@ -21,16 +22,16 @@ namespace LambdaFunction
             log.LogLine($"Skill Request Object:");
             log.LogLine(JsonConvert.SerializeObject(input));
 
-            //var allResources = GetResources();
-            //var resource = allResources.FirstOrDefault();
+            if (input.GetRequestType() == typeof(LaunchRequest))
+            {
+                log.LogLine($"Default LaunchRequest made: 'Alexa, open numbers game");
+                innerResponse = new PlainTextOutputSpeech()
+                {
+                    Text = "Welcome to the numbers game!"
+                };
+                response.Response.ShouldEndSession = true;
 
-            //if (input.GetRequestType() == typeof(LaunchRequest))
-            //{
-            //    log.LogLine($"Default LaunchRequest made: 'Alexa, open Science Facts");
-            //    innerResponse = new PlainTextOutputSpeech();
-            //    (innerResponse as PlainTextOutputSpeech).Text = emitNewFact(resource, true);
-
-            //}
+            }
             //else if (input.GetRequestType() == typeof(IntentRequest))
             //{
             //    var intentRequest = (IntentRequest)input.Request;
