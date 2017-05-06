@@ -12,6 +12,7 @@ namespace LambdaFunction
 {
     public class Function
     {
+        // LambdaFunction::LambdaFunction.Function::FunctionHandler
         public SkillResponse FunctionHandler(SkillRequest input, ILambdaContext context)
         {
             SkillResponse response = new SkillResponse();
