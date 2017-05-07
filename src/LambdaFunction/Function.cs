@@ -36,7 +36,7 @@ namespace LambdaFunction
             log.LogLine(JsonConvert.SerializeObject(input));
 
             var count = (long)0; 
-            if (input.Session.Attributes.ContainsKey("foo"))
+            if (input.Session.Attributes != null && input.Session.Attributes.ContainsKey("foo"))
             {
                 count = (long)input.Session.Attributes["foo"];
             }
