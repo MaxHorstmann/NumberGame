@@ -1,2 +1,4 @@
+MoreIntent more
+MoreIntent one more
 AMAZON.StopIntent exit
 AMAZON.StopIntent that is enough

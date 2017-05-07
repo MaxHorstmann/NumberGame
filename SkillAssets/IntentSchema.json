@@ -1,6 +1,6 @@
 {
   "intents": [
-    { "intent": "PlayIntent"},
+    { "intent": "MoreIntent"},
     { "intent": "AMAZON.HelpIntent" },
     { "intent": "AMAZON.StopIntent" },
     { "intent": "AMAZON.CancelIntent" }

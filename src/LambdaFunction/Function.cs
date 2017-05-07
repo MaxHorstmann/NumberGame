@@ -35,10 +35,10 @@ namespace LambdaFunction
             log.LogLine($"Skill Request Object:");
             log.LogLine(JsonConvert.SerializeObject(input));
 
-            var count = 0; 
-            if (input.Session.Attributes.ContainsKey("Foo"))
+            var count = (long)0; 
+            if (input.Session.Attributes.ContainsKey("foo"))
             {
-                count = input.Session.Attributes["Foo"] as int? ?? 0;
+                count = (long)input.Session.Attributes["foo"];
             }
 
             if (input.GetRequestType() == typeof(LaunchRequest))
@@ -46,12 +46,8 @@ namespace LambdaFunction
                 log.LogLine($"Default LaunchRequest made: 'Alexa, open numbers game");
                 innerResponse = new PlainTextOutputSpeech()
                 {
-                    Text = "Welcome to the numbers game!"
+                    Text = $"Welcome to the numbers game! Count is {count}"
                 };
-
-                var launchRequest = input.Request as LaunchRequest;
-                
-                
             }
             else if (input.GetRequestType() == typeof(IntentRequest))
             {
@@ -79,7 +75,7 @@ namespace LambdaFunction
                     case "MoreIntent":
                         log.LogLine($"More intent");
                         innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = $"Count is {count}";
+                        (innerResponse as PlainTextOutputSpeech).Text = $"Count is {++count}";
                         break;
                     default:
                         log.LogLine($"Unknown intent: " + intentRequest.Intent.Name);
@@ -91,6 +87,11 @@ namespace LambdaFunction
 
             response.Response.OutputSpeech = innerResponse;
             response.Version = "1.0";
+
+            if (response.SessionAttributes == null)
+            {
+                response.SessionAttributes = new System.Collections.Generic.Dictionary<string, object>();
+            }
             response.SessionAttributes.Add("foo", count++);
 
             log.LogLine($"Skill Response Object...");
