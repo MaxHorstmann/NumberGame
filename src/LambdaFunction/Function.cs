@@ -86,6 +86,7 @@ namespace LambdaFunction
                         } else
                         {
                             (innerResponse as PlainTextOutputSpeech).Text = $"Yes! {answer} is correct!";
+                            response.Response.ShouldEndSession = true;
                         }
 
                         break;
@@ -104,7 +105,7 @@ namespace LambdaFunction
             {
                 response.SessionAttributes = new System.Collections.Generic.Dictionary<string, object>();
             }
-            response.SessionAttributes.Add("foo", count++);
+            //response.SessionAttributes.Add("foo", count++);
 
             log.LogLine($"Skill Response Object...");
             log.LogLine(JsonConvert.SerializeObject(response));
