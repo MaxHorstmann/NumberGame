@@ -1,8 +1,22 @@
 {
   "intents": [
-    { "intent": "MoreIntent"},
-    { "intent": "AMAZON.HelpIntent" },
-    { "intent": "AMAZON.StopIntent" },
-    { "intent": "AMAZON.CancelIntent" }
+    {
+      "intent": "AnswerIntent",
+      "slots": [
+        {
+          "name": "Answer",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
   ]
 }

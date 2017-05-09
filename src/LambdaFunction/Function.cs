@@ -35,18 +35,14 @@ namespace LambdaFunction
             log.LogLine($"Skill Request Object:");
             log.LogLine(JsonConvert.SerializeObject(input));
 
-            var count = (long)0; 
-            if (input.Session.Attributes != null && input.Session.Attributes.ContainsKey("foo"))
-            {
-                count = (long)input.Session.Attributes["foo"];
-            }
+            var currentQuestion = 0; // TODO get from session
 
             if (input.GetRequestType() == typeof(LaunchRequest))
             {
                 log.LogLine($"Default LaunchRequest made: 'Alexa, open numbers game");
                 innerResponse = new PlainTextOutputSpeech()
                 {
-                    Text = $"Welcome to the numbers game! Count is {count}"
+                    Text = numberFacts[currentQuestion].Question
                 };
             }
             else if (input.GetRequestType() == typeof(IntentRequest))
@@ -72,10 +68,26 @@ namespace LambdaFunction
                         innerResponse = new PlainTextOutputSpeech();
                         //(innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         break;
-                    case "MoreIntent":
-                        log.LogLine($"More intent");
+                    case "AnswerIntent":
+                        log.LogLine($"Answer intent");
+                        var answer = long.Parse(intentRequest.Intent.Slots["Answer"].Value);
+                        log.LogLine($"Answer provided: {answer}");
+
                         innerResponse = new PlainTextOutputSpeech();
-                        (innerResponse as PlainTextOutputSpeech).Text = $"Count is {++count}";
+
+                        var correctAnswer = numberFacts[currentQuestion].Answer;
+
+                        if (answer < correctAnswer)
+                        {
+                            (innerResponse as PlainTextOutputSpeech).Text = $"No, it's more than {answer}.";
+                        } else if (answer > correctAnswer)
+                        {
+                            (innerResponse as PlainTextOutputSpeech).Text = $"No, it's less than {answer}.";
+                        } else
+                        {
+                            (innerResponse as PlainTextOutputSpeech).Text = $"Yes! {answer} is correct!";
+                        }
+
                         break;
                     default:
                         log.LogLine($"Unknown intent: " + intentRequest.Intent.Name);

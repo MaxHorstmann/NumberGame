@@ -1,4 +1,7 @@
-MoreIntent more
-MoreIntent one more
+AnswerIntent {Answer}
+AnswerIntent probably {Answer}
+AnswerIntent I guess {Answer}
+AnswerIntent around {Answer}
+AnswerIntent maybe {Answer}
 AMAZON.StopIntent exit
 AMAZON.StopIntent that is enough
