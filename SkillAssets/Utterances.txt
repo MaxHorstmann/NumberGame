@@ -3,13 +3,13 @@ AnswerIntent probably {Answer}
 AnswerIntent I guess {Answer}
 AnswerIntent around {Answer}
 AnswerIntent maybe {Answer}
-RepeatQuestionIntent What's the question?
-RepeatQuestionIntent What's the question again?
-RepeatQuestionIntent What was the question?
-RepeatQuestionIntent What was the question again?
-RepeatQuestionIntent Can you repeat the question?
-RepeatQuestionIntent Can you repeat the question, please?
-RepeatQuestionIntent Repeat the question!
-RepeatQuestionIntent Repeat the question, please!
+RepeatQuestionIntent What's the question
+RepeatQuestionIntent What's the question again
+RepeatQuestionIntent What was the question
+RepeatQuestionIntent What was the question again
+RepeatQuestionIntent Can you repeat the question
+RepeatQuestionIntent Can you repeat the question please
+RepeatQuestionIntent Repeat the question
+RepeatQuestionIntent Repeat the question please
 AMAZON.StopIntent exit
 AMAZON.StopIntent that is enough
