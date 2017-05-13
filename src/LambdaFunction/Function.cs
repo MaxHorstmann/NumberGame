@@ -52,23 +52,6 @@ namespace LambdaFunction
 
                 switch (intentRequest.Intent.Name)
                 {
-                    case "AMAZON.CancelIntent":
-                        log.LogLine($"AMAZON.CancelIntent: send StopMessage");
-                        innerResponse = new PlainTextOutputSpeech();
-                        //(innerResponse as PlainTextOutputSpeech).Text = resource.StopMessage;
-                        response.Response.ShouldEndSession = true;
-                        break;
-                    case "AMAZON.StopIntent":
-                        log.LogLine($"AMAZON.StopIntent: send StopMessage");
-                        innerResponse = new PlainTextOutputSpeech();
-                        //(innerResponse as PlainTextOutputSpeech).Text = resource.StopMessage;
-                        response.Response.ShouldEndSession = true;
-                        break;
-                    case "AMAZON.HelpIntent":
-                        log.LogLine($"AMAZON.HelpIntent: send HelpMessage");
-                        innerResponse = new PlainTextOutputSpeech();
-                        //(innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
-                        break;
                     case "AnswerIntent":
                         log.LogLine($"Answer intent");
 
@@ -88,15 +71,39 @@ namespace LambdaFunction
                         if (answer < correctAnswer)
                         {
                             (innerResponse as PlainTextOutputSpeech).Text = $"No, it's more than {answer}.";
-                        } else if (answer > correctAnswer)
+                        }
+                        else if (answer > correctAnswer)
                         {
                             (innerResponse as PlainTextOutputSpeech).Text = $"No, it's less than {answer}.";
-                        } else
+                        }
+                        else
                         {
                             (innerResponse as PlainTextOutputSpeech).Text = $"Yes! {answer} is correct!";
                             response.Response.ShouldEndSession = true;
                         }
 
+                        break;
+
+                    case "RepeatQuestionIntent":
+                        (innerResponse as PlainTextOutputSpeech).Text = numberFacts[currentQuestion].Question;
+                        break;
+
+                    case "AMAZON.CancelIntent":
+                        log.LogLine($"AMAZON.CancelIntent: send StopMessage");
+                        innerResponse = new PlainTextOutputSpeech();
+                        //(innerResponse as PlainTextOutputSpeech).Text = resource.StopMessage;
+                        response.Response.ShouldEndSession = true;
+                        break;
+                    case "AMAZON.StopIntent":
+                        log.LogLine($"AMAZON.StopIntent: send StopMessage");
+                        innerResponse = new PlainTextOutputSpeech();
+                        //(innerResponse as PlainTextOutputSpeech).Text = resource.StopMessage;
+                        response.Response.ShouldEndSession = true;
+                        break;
+                    case "AMAZON.HelpIntent":
+                        log.LogLine($"AMAZON.HelpIntent: send HelpMessage");
+                        innerResponse = new PlainTextOutputSpeech();
+                        //(innerResponse as PlainTextOutputSpeech).Text = resource.HelpMessage;
                         break;
                     default:
                         log.LogLine($"Unknown intent: " + intentRequest.Intent.Name);
