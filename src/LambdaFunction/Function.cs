@@ -42,7 +42,8 @@ namespace LambdaFunction
                 log.LogLine($"Default LaunchRequest made: 'Alexa, open numbers game");
                 innerResponse = new PlainTextOutputSpeech()
                 {
-                    Text = numberFacts[currentQuestion].Question
+                    Text = "Welcome to the numbers game! Let's get started: " + 
+                        numberFacts[currentQuestion].Question
                 };
             }
             else if (input.GetRequestType() == typeof(IntentRequest))
@@ -70,7 +71,14 @@ namespace LambdaFunction
                         break;
                     case "AnswerIntent":
                         log.LogLine($"Answer intent");
-                        var answer = long.Parse(intentRequest.Intent.Slots["Answer"].Value);
+
+                        long answer;
+                        if (!long.TryParse(intentRequest.Intent.Slots["Answer"].Value, out answer))
+                        {
+                            (innerResponse as PlainTextOutputSpeech).Text = "Sorry, I didn't quite get that. Please say a number.";
+                            break;
+                        }
+
                         log.LogLine($"Answer provided: {answer}");
 
                         innerResponse = new PlainTextOutputSpeech();
