@@ -88,7 +88,10 @@ namespace LambdaFunction
 
                         case "RepeatQuestionIntent":
                             log.LogLine($"RepeatQuestionIntent");
-                            (innerResponse as PlainTextOutputSpeech).Text = numberFacts[currentQuestion].Question;
+                            innerResponse = new PlainTextOutputSpeech()
+                            {
+                                Text = numberFacts[currentQuestion].Question
+                            };
                             break;
 
                         case "AMAZON.CancelIntent":
