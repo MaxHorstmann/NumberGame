@@ -1,0 +1,7 @@
+version: 0.1
+
+phases:
+  build:
+    commands:
+      - dotnet restore src/LambdaFunction.sln
+      - dotnet publish src/LambdaFunction.sln
