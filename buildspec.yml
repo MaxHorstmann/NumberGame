@@ -4,7 +4,7 @@ phases:
   build:
     commands:
       - dotnet restore src/LambdaFunction.sln
-      - dotnet publish src/LambdaFunction.sln
+      - dotnet publish src/LambdaFunction.sln -c Release
 
 artifacts:
   files:
