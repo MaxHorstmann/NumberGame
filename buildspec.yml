@@ -5,4 +5,3 @@ phases:
     commands:
       - dotnet restore src/LambdaFunction.sln
       - dotnet publish src/LambdaFunction.sln
-      - zip lambda.zip src/LambdaFunction/bin/Release/netcoreapp1.1/publish/*
