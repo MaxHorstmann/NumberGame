@@ -1,7 +1,12 @@
-version: 0.1
+version: 0.2
 
 phases:
   build:
     commands:
       - dotnet restore src/LambdaFunction.sln
       - dotnet publish src/LambdaFunction.sln
+
+artifacts:
+  files:
+    - src/LambdaFunction/bin/Release/netcoreapp1.1/publish/*
+  discard-paths: yes
