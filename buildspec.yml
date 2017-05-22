@@ -1,13 +1,6 @@
 version: 0.2
 
 phases:
-  install:
-    commands:
-      - apt-get update      
-      - apt-get -y install zip
-      - curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-      - unzip awscli-bundle.zip
-      - ./awscli-bundle/install -b ~/bin/aws
   build:
     commands:
       - dotnet restore src/LambdaFunction.sln
