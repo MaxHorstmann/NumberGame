@@ -5,5 +5,7 @@ phases:
     commands:
       - dotnet restore src/LambdaFunction.sln
       - dotnet publish src/LambdaFunction.sln -c Release
-      - zip lambda.zip src/LambdaFunction/bin/Release/netcoreapp1.1/publish/*
+      - cd src/LambdaFunction/bin/Release/netcoreapp1.1/publish
+      - zip ../../../../../../lambda.zip *
+      - cd ../../../../../..
       - /root/bin/aws lambda update-function-code --function-name NumbersGame --zip-file fileb://lambda.zip
